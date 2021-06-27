@@ -19,10 +19,12 @@ const Posts = ({ posts = [] }: any) => {
 export const getStaticProps: GetStaticProps = async (context: any) => {
   return client
     .fetch(
-      `*[_type == "post"]{
+      `//groq
+      *[_type == "post"]{
         title,
         "slug": slug.current
-    }[0..9]`
+      }[0..9]
+      `
     )
     .then((posts) => ({ props: { posts } }))
     .catch((e) => ({ props: { posts: null } }));
